@@ -14,6 +14,13 @@ namespace ofxAsio {
 		}
 
 		//----------
+		EndPoint::EndPoint(string ipAddressString, int port) {
+			auto ipAddress = asio::ip::address::from_string(ipAddressString);
+			auto endPoint = asio::ip::udp::endpoint(ipAddress, port);
+			this->endPoint = endPoint;
+		}
+
+		//----------
 		asio::ip::udp::endpoint & EndPoint::getEndPoint() {
 			return this->endPoint;
 		}

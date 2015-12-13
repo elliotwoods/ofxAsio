@@ -3,8 +3,7 @@
 #include "Socket.h"
 
 namespace ofxAsio {
-
 	namespace UDP {
-		typedef Socket Server;
+		typedef Socket Client;
 	}
 }
