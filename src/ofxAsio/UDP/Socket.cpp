@@ -1,5 +1,7 @@
 #include "Socket.h"
 
+#include "ofxProfiler.h"
+
 namespace ofxAsio {
 	namespace UDP {
 		//----------
@@ -41,6 +43,9 @@ namespace ofxAsio {
 			asio::error_code errorCode;
 			const auto & messageString = dataGram->getMessage();
 			const auto & endPoint = dataGram->getEndPoint().getEndPoint();
+
+			//this operation takes 0.2us for a 9 KB messageString.
+			//memcpy takes about 10us for this amount of data, so we presume it's not a copy but a wrapper
 			auto buffer = asio::buffer(messageString);
 
 			this->socket.send_to(buffer, endPoint, 0, errorCode);
