@@ -29,5 +29,11 @@ namespace ofxAsio {
 		const asio::ip::udp::endpoint & EndPoint::getEndPoint() const {
 			return this->endPoint;
 		}
+
+		//----------
+		ostream & operator<<(ostream & os, const EndPoint & endPoint) {
+			os << endPoint.getEndPoint();
+			return os;
+		}
 	}
 }

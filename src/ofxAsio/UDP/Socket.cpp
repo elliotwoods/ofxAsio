@@ -1,7 +1,5 @@
 #include "Socket.h"
 
-#include "ofxProfiler.h"
-
 namespace ofxAsio {
 	namespace UDP {
 		//----------
@@ -13,6 +11,7 @@ namespace ofxAsio {
 		//----------
 		Socket::Socket(int port) :
 			socket(this->ioService, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)) {
+
 		}
 
 		//----------

@@ -15,5 +15,7 @@ namespace ofxAsio {
 		protected:
 			asio::ip::udp::endpoint endPoint;
 		};
+
+		ostream & operator<<(ostream &, const EndPoint &);
 	}
 }
