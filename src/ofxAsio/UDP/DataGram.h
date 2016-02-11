@@ -9,21 +9,51 @@ namespace ofxAsio {
 	namespace UDP {
 		class DataGram {
 		public:
-			DataGram();
-			~DataGram();
+			class Message {
+			public:
+				enum Allocation {
+					Empty = 0,
+					Copy,
+					Reference
+				};
 
-			void setMessage(const string &);
-			void setMessageExternal(const string &); //uses a pointer to the message string rather than a copy
-			string & getMessage();
-			const string & getMessage() const;
+				~Message();
+
+				//local allocation
+				void resize(size_t size);
+
+				//set data
+				void set(const string &, Allocation allocation = Allocation::Copy);
+				void set(const void * data, size_t size, Allocation allocation = Allocation::Copy);
+				template<typename PodType>
+				void set(const PodType & data) {
+					static_assert(is_pod<PodType>::value, "ofxAsio::UDP::DataGram::set<PodType>(...)  only supports Plain Old Data. For more complex types, you need to serialize your data first.");
+					this->send(&data, sizeof(PodType));
+				}
+				void clear();
+
+				//get data
+				bool empty() const;
+				const char * data() const;
+				char * data();
+				size_t size() const;
+				string getMessageString() const;
+
+				Allocation getAllocation() const;
+			protected:
+				char * _data;
+				size_t _size;
+				Allocation allocation = Allocation::Empty;
+			};
+
+			const Message & getMessage() const;
+			Message & getMessage();
 
 			void setEndPoint(const EndPoint &);
 			EndPoint & getEndPoint();
 			const EndPoint & getEndPoint() const;
 		protected:
-			bool localAllocation;
-			std::string * message;
-
+			Message message;
 			EndPoint endPoint;
 		};
 	}
