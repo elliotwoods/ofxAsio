@@ -26,9 +26,9 @@ namespace ofxAsio {
 				void set(const string &, Allocation allocation = Allocation::Copy);
 				void set(const void * data, size_t size, Allocation allocation = Allocation::Copy);
 				template<typename PodType>
-				void set(const PodType & data) {
+				void set(const PodType & data, Allocation allocation = Allocation::Copy) {
 					static_assert(is_pod<PodType>::value, "ofxAsio::UDP::DataGram::set<PodType>(...)  only supports Plain Old Data. For more complex types, you need to serialize your data first.");
-					this->send(&data, sizeof(PodType));
+					this->set(&data, sizeof(PodType), allocation);
 				}
 				void clear();
 
@@ -41,8 +41,8 @@ namespace ofxAsio {
 
 				Allocation getAllocation() const;
 			protected:
-				char * _data;
-				size_t _size;
+				char * _data = nullptr;
+				size_t _size = 0;
 				Allocation allocation = Allocation::Empty;
 			};
 
