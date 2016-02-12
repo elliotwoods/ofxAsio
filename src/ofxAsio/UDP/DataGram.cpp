@@ -28,7 +28,9 @@ namespace ofxAsio {
 			memcpy(data, this->_data, min<size_t>(size, this->_size));
 			swap(data, this->_data);
 			swap(size, this->_size);
-			delete[] data;
+			if(data) {
+				delete[] data;
+			}
 		}
 
 		//----------
@@ -49,7 +51,7 @@ namespace ofxAsio {
 				switch (this->allocation) {
 				case Allocation::Copy:
 				{
-					if (size = this->_size) {
+					if (size == this->_size) {
 						//special case, no reallocation necessary
 						memcpy(this->_data, data, this->_size);
 						break;
@@ -123,7 +125,7 @@ namespace ofxAsio {
 
 		//----------
 		string DataGram::Message::getMessageString() const {
-			if (this->empty()) {
+			if (size() == 0) {
 				return string();
 			}
 			else {

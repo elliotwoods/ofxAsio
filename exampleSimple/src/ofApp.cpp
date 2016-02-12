@@ -17,13 +17,16 @@ void ofApp::update(){
 	{
 		//make the DataGram
 		auto dataGram = make_shared<ofxAsio::UDP::DataGram>();
-		dataGram->setMessage("I am the message."); //--set the message content
 		dataGram->setEndPoint(ofxAsio::UDP::EndPoint("127.0.0.1", 4444)); //--set where the message will be sent to
+
+		auto & message = dataGram->getMessage();
+		message.set("I am the message."); //--set the message content
 
 		//send the DataGram
 		this->sender.send(dataGram);
 
-		cout << dataGram->getMessage() << endl;
+		auto & m = dataGram->getMessage();
+		cout << m.getMessageString() << endl;
 		cout << "Sent to : " << dataGram->getEndPoint() << endl;
 	}
 	cout << endl;
@@ -35,8 +38,8 @@ void ofApp::update(){
 	{
 		//receive a DataGram
 		auto dataGram = this->receiver->receive();
-
-		cout << dataGram->getMessage() << endl;
+		const auto & message = dataGram->getMessage();
+		cout << message.getMessageString() << endl;
 		cout << "Arrived from : " << dataGram->getEndPoint() << endl;
 	}
 	cout << endl;
