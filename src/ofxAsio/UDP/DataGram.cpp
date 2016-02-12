@@ -24,14 +24,11 @@ namespace ofxAsio {
 				return;
 			}
 
-			if (this->allocation == Allocation::Copy) {
-				// after this operation we will use local allocation
-				string messageCopy = this->getMessageString();
-				this->set(messageCopy, Allocation::Copy);
-			}
-			else {
-				this->set(this->_data, size, Allocation::Copy);
-			}
+			auto data = new char[size];
+			memcpy(data, this->_data, min<size_t>(size, this->_size));
+			swap(data, this->_data);
+			swap(size, this->_size);
+			delete[] data;
 		}
 
 		//----------
