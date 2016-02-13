@@ -28,7 +28,7 @@ namespace ofxAsio {
 			asio::io_service::work work;
 			asio::ip::udp::socket socket;
 
-			thread asyncThread;
+			std::thread asyncThread;
 
 			struct AsyncIncoming {
 				string buffer;
