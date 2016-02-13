@@ -24,11 +24,24 @@ namespace ofxAsio {
 				return;
 			}
 
-			auto data = new char[size];
-			memcpy(data, this->_data, min<size_t>(size, this->_size));
-			swap(data, this->_data);
-			swap(size, this->_size);
-			delete[] data;
+			if (size == 0) {
+				this->clear();
+			}
+			else {
+				//create a new buffer with existing data
+				auto data = new char[size];
+				memcpy(data, this->_data, min<size_t>(size, this->_size));
+
+				//swap this new buffer with the old one
+				swap(data, this->_data);
+				swap(size, this->_size);
+
+				//delete the old one
+				delete[] data;
+
+				//now we're definitely a copy
+				this->allocation = Allocation::Copy;
+			}
 		}
 
 		//----------
@@ -103,7 +116,7 @@ namespace ofxAsio {
 
 		//----------
 		bool DataGram::Message::empty() const {
-			return this->allocation != Allocation::Empty;
+			return this->allocation == Allocation::Empty;
 		}
 
 		//----------

@@ -3,15 +3,31 @@
 namespace ofxAsio {
 	namespace UDP {
 		//----------
-		Socket::Socket() :
-		socket(this->ioService) {
+		Socket::Socket()
+			: socket(this->ioService)
+			, work(this->ioService)
+		{
 			socket.open(asio::ip::udp::v4());
+
+			this->asyncThread = thread([this]() {
+				this->ioService.run();
+			});
 		}
 
 		//----------
-		Socket::Socket(int port) :
-			socket(this->ioService, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)) {
+		Socket::Socket(int port)
+			: socket(this->ioService, asio::ip::udp::endpoint(asio::ip::udp::v4(), port))
+			, work(this->ioService)
+		{
+			this->asyncThread = thread([this]() {
+				this->ioService.run();
+			});
+		}
 
+		//----------
+		Socket::~Socket() {
+			this->ioService.stop();
+			this->asyncThread.join();
 		}
 
 		//----------
@@ -35,6 +51,45 @@ namespace ofxAsio {
 				message.resize(receivedSize);
 				return dataGram;
 			}
+		}
+
+		//----------
+		void Socket::asyncReceiveOnce(const function<void(AsyncArguments)> & callback, size_t bufferSize) {
+			this->asyncIncoming.buffer.resize(bufferSize);
+			this->socket.async_receive_from(
+				asio::buffer(this->asyncIncoming.buffer),
+				this->asyncIncoming.endpoint,
+				[this, callback](asio::error_code errorCode,
+					size_t size) {
+				if (errorCode) {
+					AsyncArguments args = {
+						false,
+						asio::system_error(errorCode).what(),
+						shared_ptr<DataGram>()
+					};
+					callback(args);
+				}
+				else {
+					auto dataGram = make_shared<DataGram>();
+					dataGram->getMessage().set(this->asyncIncoming.buffer);
+					dataGram->setEndPoint(this->asyncIncoming.endpoint);
+
+					AsyncArguments args = {
+						true,
+						asio::system_error(errorCode).what(),
+						dataGram
+					};
+					callback(args);
+				}
+			});
+		}
+
+		//----------
+		void Socket::asyncReceiveAll(const function<void(AsyncArguments)> & callback, size_t bufferSize) {
+			this->asyncReceiveOnce([this, callback, bufferSize](AsyncArguments args) {
+				asyncReceiveAll(callback, bufferSize);
+				callback(args);
+			});
 		}
 
 		//----------
