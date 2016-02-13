@@ -62,7 +62,7 @@ namespace ofxAsio {
 				switch (this->allocation) {
 				case Allocation::Copy:
 				{
-					if (size = this->_size) {
+					if (size == this->_size) {
 						//special case, no reallocation necessary
 						memcpy(this->_data, data, this->_size);
 						break;
@@ -136,7 +136,7 @@ namespace ofxAsio {
 
 		//----------
 		string DataGram::Message::getMessageString() const {
-			if (this->empty()) {
+			if (size() == 0) {
 				return string();
 			}
 			else {
