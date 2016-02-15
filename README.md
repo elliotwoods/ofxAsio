@@ -1,7 +1,7 @@
 ofxAsio
 =======
 
-Implementaiton of the !(ASIO)[http://think-async.com/] networking library (cherry picked from !(boost)[http://www.boost.org/doc/libs/1_60_0/doc/html/boost_asio.html]) for use with openFrameworks.
+Implementaiton of the [ASIO](http://think-async.com/) networking library (cherry picked from [boost](http://www.boost.org/doc/libs/1_60_0/doc/html/boost_asio.html]) for use with openFrameworks.
 
 ASIO is a cross-platform library for low latency unmanaged network connections (as such it is often selected for GigE Vision and other low latency use cases).
 
@@ -13,6 +13,15 @@ This addon is tested and working with :
 * openFrameworks 0.9.0+
 * Visual Studio 2015 x64 (Windows 10)
 * XCode 7.2 x64 (OSX 10.11) 
+
+Requirements
+============
+
+This addon optionally uses:
+
+* ofxAddonLib - https://github.com/elliotwoods/ofxAddonLib
+
+with Visual Studio.
 
 License
 =======
