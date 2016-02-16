@@ -26,8 +26,7 @@ namespace ofxAsio {
 
 		//----------
 		Socket::~Socket() {
-			this->ioService.stop();
-			this->asyncThread.join();
+			this->close();
 		}
 
 		//----------
@@ -109,6 +108,15 @@ namespace ofxAsio {
 			}
 			else {
 				return true;
+			}
+		}
+
+		//----------
+		void Socket::close() {
+			this->socket.cancel();
+			this->ioService.stop();
+			if (this->asyncThread.joinable()) {
+				this->asyncThread.join();
 			}
 		}
 	}
