@@ -20,14 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ofxAsio.h" />
+    <ClInclude Include="..\src\ofxAsio\DataGram.h" />
     <ClInclude Include="..\src\ofxAsio\Includes.h" />
+    <ClInclude Include="..\src\ofxAsio\TCP\Client.h" />
+    <ClInclude Include="..\src\ofxAsio\TCP\Server.h" />
+    <ClInclude Include="..\src\ofxAsio\TCP\Socket.h" />
     <ClInclude Include="..\src\ofxAsio\UDP\Client.h" />
-    <ClInclude Include="..\src\ofxAsio\UDP\DataGram.h" />
     <ClInclude Include="..\src\ofxAsio\UDP\EndPoint.h" />
+    <ClInclude Include="..\src\ofxAsio\UDP\DataGram.h" />
     <ClInclude Include="..\src\ofxAsio\UDP\Server.h" />
     <ClInclude Include="..\src\ofxAsio\UDP\Socket.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\ofxAsio\DataGram.cpp" />
+    <ClCompile Include="..\src\ofxAsio\TCP\Client.cpp" />
+    <ClCompile Include="..\src\ofxAsio\TCP\Server.cpp" />
+    <ClCompile Include="..\src\ofxAsio\TCP\Socket.cpp" />
     <ClCompile Include="..\src\ofxAsio\UDP\DataGram.cpp" />
     <ClCompile Include="..\src\ofxAsio\UDP\EndPoint.cpp" />
     <ClCompile Include="..\src\ofxAsio\UDP\Socket.cpp" />

@@ -10,15 +10,15 @@
     <Filter Include="src\ofxAsio\UDP">
       <UniqueIdentifier>{a935e2a5-4264-4865-88ec-26fcc248d293}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ofxAsio\TCP">
+      <UniqueIdentifier>{92dbb121-584a-4872-86d8-a076515f6e62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ofxAsio\Includes.h">
       <Filter>src\ofxAsio</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ofxAsio\UDP\Client.h">
-      <Filter>src\ofxAsio\UDP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ofxAsio\UDP\DataGram.h">
       <Filter>src\ofxAsio\UDP</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ofxAsio\UDP\EndPoint.h">
@@ -33,15 +33,42 @@
     <ClInclude Include="..\src\ofxAsio.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ofxAsio\TCP\Client.h">
+      <Filter>src\ofxAsio\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxAsio\DataGram.h">
+      <Filter>src\ofxAsio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxAsio\UDP\DataGram.h">
+      <Filter>src\ofxAsio\UDP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxAsio\TCP\Socket.h">
+      <Filter>src\ofxAsio\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxAsio\TCP\Server.h">
+      <Filter>src\ofxAsio\TCP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ofxAsio\UDP\DataGram.cpp">
-      <Filter>src\ofxAsio\UDP</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\ofxAsio\UDP\EndPoint.cpp">
       <Filter>src\ofxAsio\UDP</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ofxAsio\UDP\Socket.cpp">
+      <Filter>src\ofxAsio\UDP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxAsio\TCP\Client.cpp">
+      <Filter>src\ofxAsio\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxAsio\DataGram.cpp">
+      <Filter>src\ofxAsio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxAsio\TCP\Socket.cpp">
+      <Filter>src\ofxAsio\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxAsio\TCP\Server.cpp">
+      <Filter>src\ofxAsio\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxAsio\UDP\DataGram.cpp">
       <Filter>src\ofxAsio\UDP</Filter>
     </ClCompile>
   </ItemGroup>
