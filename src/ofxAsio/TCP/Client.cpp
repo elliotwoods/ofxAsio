@@ -1,5 +1,7 @@
 #include "Client.h"
 
+#include "ofLog.h"
+
 using namespace asio;
 using namespace asio::ip;
 

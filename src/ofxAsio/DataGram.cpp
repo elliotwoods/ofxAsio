@@ -1,6 +1,7 @@
 #include "DataGram.h"
 
 #include "ofUtils.h"
+#include "ofLog.h"
 
 using namespace std;
 

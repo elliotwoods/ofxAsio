@@ -1,5 +1,7 @@
 #include "Socket.h"
 
+#include "ofLog.h"
+
 namespace ofxAsio {
 	namespace UDP {
 		//----------
